@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    githubUser: 'kbastani',
+    githubUser: 'PhEEP',
+    avatar: 'https://avatars0.githubusercontent.com/u/9273255',
     gists: [],
     loading: false,
     error: null
@@ -37,6 +38,7 @@ export const store = new Vuex.Store({
                 .then(response => {
                   commit('setGists', response.data)
                   commit('setLoading', false)
+                  console.log(response)
                 })
                 .catch(error => {
                   commit('setError', error)
