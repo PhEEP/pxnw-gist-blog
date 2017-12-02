@@ -8,7 +8,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/:id',
+      path: '/',
       name: 'GistBlogList',
       component: GistBlogList,
       props: { default: true }

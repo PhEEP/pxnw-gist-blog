@@ -8,6 +8,9 @@ import 'vuetify/dist/vuetify.css'
 import App from './App'
 import router from './router'
 import { store } from './store'
+
+import AppAlert from './components/shared/AppAlert.vue'
+
 Vue.use(Vuetify, {
   theme: {
     primary: '#ee44aa',
@@ -19,7 +22,7 @@ Vue.use(Vuetify, {
     warning: '#FFC107'
   }
 })
-
+Vue.component('app-alert', AppAlert)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

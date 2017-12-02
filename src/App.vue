@@ -1,7 +1,7 @@
 <template>
   <v-app light>
     <v-toolbar app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon> -->
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-slide-y-transition mode="out-in">
@@ -16,8 +16,11 @@
     </v-toolbar>
     <v-content>
       <v-container fluid grid-list-lg>
+          <span v-if="error">
+            <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+          </span>
         <v-slide-y-transition mode="out-in">
-          <GistBlogList />
+          <router-view></router-view>
         </v-slide-y-transition>
       </v-container>
     </v-content>
@@ -47,6 +50,14 @@ export default {
   methods: {
     toggleSearching () {
       this.$store.dispatch('toggleSearch')
+    },
+    onDismissed () {
+      this.$store.dispatch('clearError')
+    }
+  },
+  computed: {
+    error () {
+      return this.$store.getters.error
     }
   }
 }

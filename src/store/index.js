@@ -8,7 +8,7 @@ export const store = new Vuex.Store({
   state: {
     githubUser: {
       login: 'PhEEP',
-      avatar_url: 'https://avatars0.githubusercontent.com/u/9273255'
+      avatar_url: 'https://avatars0.githubusercontent.com/u/49620'
     },
     gists: [],
     loading: false,
@@ -68,10 +68,19 @@ export const store = new Vuex.Store({
     setGist ({ commit }, payload) {
       commit('setLoading', true)
       commit('clearError')
-      axios.get(`https://api.github.com/gists/${payload}`).then(response => {
-        console.log(response)
-        commit('setGist', response.data)
-      })
+      axios
+                .get(`https://api.github.com/gists/${payload}`)
+                .then(response => {
+                  console.log(response)
+                  commit('setGist', response.data)
+                })
+                .catch(error => {
+                  commit('setError', error)
+                  commit('setLoading', false)
+                })
+    },
+    clearError ({ commit }) {
+      commit('clearError')
     }
   },
   getters: {
