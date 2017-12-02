@@ -9,7 +9,7 @@
       v-if="loading"
     ></v-progress-linear>
     <v-flex xs12>
-      <h1>{{ githubUser.name }}</h1>
+      <h1>{{ githubUser.name || githubUser.login }}</h1>
     </v-flex>
     <v-flex
       xs12
@@ -22,9 +22,7 @@
         >
         </v-card-media>
         <v-card-text>
-          <p>
-            {{ githubUser.bio }}
-          </p>
+          {{ githubUser.bio }}
         </v-card-text>
         <v-card-actions>
         </v-card-actions>
