@@ -82,8 +82,8 @@ export default {
     return {}
   },
   mounted () {
-    this.$store.dispatch('setGithubUser', githubUser.login)
-    this.$store.dispatch('getGists', githubUser.login)
+    this.$store.dispatch('setGithubUser', this.githubUser.login)
+    this.$store.dispatch('getGists', this.githubUser.login)
   },
   methods: {
     dateFormat (date) {

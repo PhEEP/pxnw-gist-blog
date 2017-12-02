@@ -107,10 +107,6 @@ export const store = new Vuex.Store({
                   commit('setLoading', false)
                   commit('setRecentUsers', snapshot.val())
                 })
-                .catch(error => {
-                  commit('setError', error)
-                  commit('setLoading', false)
-                })
     }
   },
   getters: {
