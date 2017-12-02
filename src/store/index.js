@@ -7,10 +7,12 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     githubUser: {
-      login: 'PhEEP',
-      avatar_url: 'https://avatars0.githubusercontent.com/u/49620'
+      login: 'marcammann',
+      avatar_url: 'https://avatars0.githubusercontent.com/u/49620',
+      name: 'Marc Ammann'
     },
     gists: [],
+    gist: null,
     loading: false,
     error: null,
     searching: false
@@ -35,6 +37,7 @@ export const store = new Vuex.Store({
       state.searching = !state.searching
     },
     setGist (state, payload) {
+      console.log(payload, 'gist setting')
       state.gist = payload
     }
   },
@@ -71,7 +74,6 @@ export const store = new Vuex.Store({
       axios
                 .get(`https://api.github.com/gists/${payload}`)
                 .then(response => {
-                  console.log(response)
                   commit('setGist', response.data)
                 })
                 .catch(error => {

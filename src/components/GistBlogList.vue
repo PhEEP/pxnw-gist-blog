@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap align-center>
+  <v-layout row wrap>
     <v-progress-linear
       :indeterminate="true"
       v-if="loading"
@@ -8,56 +8,73 @@
       <h1>{{ githubUser.name }}</h1>
     </v-flex>
     <v-flex
-      v-if="gistList.length < 1"
       xs12
-      md6
-      lg3
+      md3
     >
       <v-card>
         <v-card-media
-        :src="githubUser.avatarUrl"
+        :src="githubUser.avatar_url"
         height="200px"
         >
         </v-card-media>
-        <v-card-text>
-          Looks like {{ githubUser.id }} doesn't have any Gists...
+        <v-card-text
+          v-if="gistList.length < 1"
+        >
+          Looks like {{ githubUser.name }} doesn't have any Gists...
         </v-card-text>
         <v-card-actions>
         </v-card-actions>
       </v-card>
     </v-flex>
     <v-flex
-      v-for="(gist, index) in gistList"
-      :key="index"
-      xs6
-      md3
-      lg2
+      xs12
+      md9
     >
-      <v-card
-        :to="'/gist/' + gist.id"
-        replace
+      <v-layout
+        row
+        wrap
       >
-        <v-card-title>
-          <h4>
-            {{ gist.description || 'No Description' }}
-          </h4>
-        </v-card-title>
-        <v-card-text>
-          {{ gist.updated_at }}
-        </v-card-text>
-      </v-card>
+        <v-flex
+          v-for="(gist, index) in gistList"
+          :key="index"
+          xs6
+          md3
+          lg2
+        >
+          <v-card
+            :to="'/gist/' + gist.id"
+            replace
+          >
+            <v-card-title>
+              <h4>
+                {{ gist.description || 'No Description' }}
+              </h4>
+            </v-card-title>
+            <v-card-text>
+              {{ dateFormat(gist.updated_at) }}
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </v-flex>
+
   </v-layout>
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'GistBlogList',
   data () {
     return {}
   },
   mounted () {
-    this.$store.dispatch('getGists', this.githubUser.id)
+    this.$store.dispatch('getGists', this.githubUser.login)
+  },
+  methods: {
+    dateFormat (date) {
+      return moment(date).format('MM-DD-YYYY')
+    }
   },
   computed: {
     gistList () {

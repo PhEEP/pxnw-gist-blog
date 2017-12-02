@@ -14,9 +14,9 @@ export default new Router({
       props: { default: true }
     },
     {
-      path: '/gist/:id',
+      path: '/gist/:gistId',
       name: 'GistBlogListItem',
-      component: GistBlogListItem,
+      components: { default: GistBlogListItem },
       props: { default: true }
     }
   ],

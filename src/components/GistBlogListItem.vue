@@ -1,16 +1,31 @@
 <template>
-  <v-layout>
+  <v-layout row wrap>
+
     <v-flex>
-      {{ gistId }}
+      <v-card>
+        <v-card-title>
+          {{ gistContent.description || 'No Description'}}
+        </v-card-title>
+        <v-card-text>
+          <pre
+            v-text="gistContent.files.content.content"
+          >
+          </pre>
+        </v-card-text>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import GistContent from '@/components/GistContent'
 export default {
   name: 'GistBlogListItem',
   data () {
     return {}
+  },
+  components: {
+    GistContent
   },
   props: ['gistId'],
   computed: {
@@ -18,8 +33,7 @@ export default {
       return this.$store.getters.gist
     }
   },
-  mounted () {
-    console.log('mounted list item')
+  created () {
     this.$store.dispatch('setGist', this.gistId)
   }
 }
