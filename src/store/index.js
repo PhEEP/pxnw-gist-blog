@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    githubUser: 'PhEEP',
+    githubUser: 'kbastani',
     gists: [],
     loading: false,
     error: null
@@ -35,6 +35,7 @@ export const store = new Vuex.Store({
       axios
                 .get(`https://api.github.com/users/${payload}/gists`)
                 .then(response => {
+                  commit('setGists', response.data)
                   console.log('====================================')
                   console.log(response)
                   console.log('====================================')
