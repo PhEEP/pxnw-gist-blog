@@ -3,6 +3,18 @@
     <v-toolbar app>
       <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon> -->
       <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-btn
+        v-for="(item, index) in navItems"
+        :key="item.icon"
+        flat
+        :to="item.url"
+        exact
+      >
+        <v-icon>
+          {{ item.icon }}
+        </v-icon>
+        {{ item.name }}
+      </v-btn>
       <v-spacer></v-spacer>
       <v-slide-y-transition mode="out-in">
         <GithubUserSearch />
@@ -69,7 +81,7 @@ export default {
         {
           name: 'User',
           icon: 'face',
-          url: '/user/' + githubUser
+          url: '/user/' + this.githubUser.login
         }
       ]
     },

@@ -26,5 +26,6 @@ export default new Router({
       props: { default: true }
     }
   ],
+  linkActiveClass: 'active',
   mode: 'history'
 })
