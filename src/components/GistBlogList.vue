@@ -1,16 +1,30 @@
 <template>
-  <v-layout row wrap>
+  <v-layout row wrap align-center>
     <v-progress-linear
       :indeterminate="true"
       v-if="loading"
     ></v-progress-linear>
     <v-flex xs12>
-      <h1>{{ githubUser }}</h1>
+      <h1>{{ githubUser.name }}</h1>
     </v-flex>
     <v-flex
       v-if="gistList.length < 1"
+      xs12
+      md6
+      lg3
     >
-      Looks like {{ githubUser }} doesn't have any Gists...
+      <v-card>
+        <v-card-media
+        :src="githubUser.avatarUrl"
+        height="200px"
+        >
+        </v-card-media>
+        <v-card-text>
+          Looks like {{ githubUser.id }} doesn't have any Gists...
+        </v-card-text>
+        <v-card-actions>
+        </v-card-actions>
+      </v-card>
     </v-flex>
     <v-flex
       v-for="(gist, index) in gistList"
@@ -20,7 +34,8 @@
       lg2
     >
       <v-card
-      :to="'/gist/' + gist.id"
+        :to="'/gist/' + gist.id"
+        replace
       >
         <v-card-title>
           <h4>
@@ -42,7 +57,7 @@ export default {
     return {}
   },
   mounted () {
-    this.$store.dispatch('getGists', this.githubUser)
+    this.$store.dispatch('getGists', this.githubUser.id)
   },
   computed: {
     gistList () {

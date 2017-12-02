@@ -6,11 +6,14 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    githubUser: 'PhEEP',
-    avatar: 'https://avatars0.githubusercontent.com/u/9273255',
+    githubUser: {
+      login: 'PhEEP',
+      avatar_url: 'https://avatars0.githubusercontent.com/u/9273255'
+    },
     gists: [],
     loading: false,
-    error: null
+    error: null,
+    searching: false
   },
   mutations: {
     setGithubUser (state, payload) {
@@ -27,12 +30,19 @@ export const store = new Vuex.Store({
     },
     clearError (state) {
       state.error = null
+    },
+    toggleSearch (state, payload) {
+      state.searching = !state.searching
+    },
+    setGist (state, payload) {
+      state.gist = payload
     }
   },
   actions: {
     getGists ({ commit }, payload) {
       commit('setLoading', true)
       commit('clearError')
+      console.log(payload)
       axios
                 .get(`https://api.github.com/users/${payload}/gists`)
                 .then(response => {
@@ -45,6 +55,23 @@ export const store = new Vuex.Store({
                   commit('setLoading', false)
                   console.log(error)
                 })
+    },
+    toggleSearch ({ commit }) {
+      commit('toggleSearch')
+    },
+    setGithubUser ({ commit }, payload) {
+      axios.get(`https://api.github.com/users/${payload}`).then(response => {
+        console.log(response)
+        commit('setGithubUser', response.data)
+      })
+    },
+    setGist ({ commit }, payload) {
+      commit('setLoading', true)
+      commit('clearError')
+      axios.get(`https://api.github.com/gists/${payload}`).then(response => {
+        console.log(response)
+        commit('setGist', response.data)
+      })
     }
   },
   getters: {
@@ -59,6 +86,12 @@ export const store = new Vuex.Store({
     },
     loading (state) {
       return state.loading
+    },
+    searching (state) {
+      return state.searching
+    },
+    gist (state) {
+      return state.gist
     }
   }
 })

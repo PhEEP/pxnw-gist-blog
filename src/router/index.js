@@ -11,13 +11,13 @@ export default new Router({
       path: '/:id',
       name: 'GistBlogList',
       component: GistBlogList,
-      props: true
+      props: { default: true }
     },
     {
       path: '/gist/:id',
       name: 'GistBlogListItem',
       component: GistBlogListItem,
-      props: true
+      props: { default: true }
     }
   ],
   mode: 'history'

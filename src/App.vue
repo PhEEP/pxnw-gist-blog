@@ -5,17 +5,11 @@
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-slide-y-transition mode="out-in">
-        <v-text-field
-          v-show="searchBar"
-          v-model="githubUserToGet"
-          label="Github username"
-          prepend-icon="search"
-        >
-        </v-text-field>
+        <GithubUserSearch />
       </v-slide-y-transition>
       <v-btn
         icon
-        @click="searchBar = !searchBar"
+        @click="toggleSearching"
       >
         <v-icon>search</v-icon>
       </v-btn>
@@ -35,6 +29,7 @@
 
 <script>
 import GistBlogList from '@/components/GistBlogList'
+import GithubUserSearch from '@/components/GithubUserSearch'
 
 export default {
   data () {
@@ -46,7 +41,13 @@ export default {
     }
   },
   components: {
-    GistBlogList
+    GistBlogList,
+    GithubUserSearch
+  },
+  methods: {
+    toggleSearching () {
+      this.$store.dispatch('toggleSearch')
+    }
   }
 }
 </script>
