@@ -17,14 +17,10 @@
 </template>
 
 <script>
-import GistContent from '@/components/GistContent'
 export default {
   name: 'GistBlogListItem',
   data () {
     return {}
-  },
-  components: {
-    GistContent
   },
   props: ['gistId'],
   computed: {

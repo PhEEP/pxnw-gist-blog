@@ -58,6 +58,23 @@ export default {
   computed: {
     error () {
       return this.$store.getters.error
+    },
+    navItems () {
+      return [
+        {
+          name: 'Home',
+          icon: 'home',
+          url: '/'
+        },
+        {
+          name: 'User',
+          icon: 'face',
+          url: '/user/' + githubUser
+        }
+      ]
+    },
+    githubUser () {
+      return this.$store.getters.githubUser
     }
   }
 }
