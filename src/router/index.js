@@ -8,9 +8,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/:id',
       name: 'GistBlogList',
-      component: GistBlogList
+      component: GistBlogList,
+      props: true
     },
     {
       path: '/gist/:id',
@@ -18,5 +19,6 @@ export default new Router({
       component: GistBlogListItem,
       props: true
     }
-  ]
+  ],
+  mode: 'history'
 })

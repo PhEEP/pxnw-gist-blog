@@ -36,12 +36,11 @@ export const store = new Vuex.Store({
                 .get(`https://api.github.com/users/${payload}/gists`)
                 .then(response => {
                   commit('setGists', response.data)
-                  console.log('====================================')
-                  console.log(response)
-                  console.log('====================================')
+                  commit('setLoading', false)
                 })
                 .catch(error => {
                   commit('setError', error)
+                  commit('setLoading', false)
                   console.log(error)
                 })
     }

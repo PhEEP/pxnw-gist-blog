@@ -24,9 +24,24 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-slide-y-transition mode="out-in">
+        <v-text-field
+          v-show="searchBar"
+          v-model="githubUserToGet"
+          label="Github username"
+          prepend-icon="search"
+        >
+        </v-text-field>
+      </v-slide-y-transition>
+      <v-btn
+        icon
+        @click="searchBar = !searchBar"
+      >
+        <v-icon>search</v-icon>
+      </v-btn>
     </v-toolbar>
     <v-content>
-      <v-container fluid>
+      <v-container fluid grid-list-lg>
         <v-slide-y-transition mode="out-in">
           <GistBlogList />
         </v-slide-y-transition>
@@ -45,13 +60,15 @@ export default {
   data () {
     return {
       drawer: true,
+      searchBar: false,
       fixed: false,
       items: [{
         icon: 'bubble_chart',
         title: 'Inspire'
       }],
       miniVariant: false,
-      title: 'Glogger'
+      title: 'Glogger',
+      githubUserToGet: ''
     }
   },
   components: {

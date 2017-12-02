@@ -1,5 +1,9 @@
 <template>
   <v-layout row wrap>
+    <v-progress-linear
+      :indeterminate="true"
+      v-if="loading"
+    ></v-progress-linear>
     <v-flex xs12>
       <h1>{{ githubUser }}</h1>
     </v-flex>
@@ -9,7 +13,6 @@
       xs6
       md3
       lg2
-
     >
       <v-card
       :to="'/gist/' + gist.id"
@@ -42,6 +45,9 @@ export default {
     },
     githubUser () {
       return this.$store.getters.githubUser
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   }
 }
