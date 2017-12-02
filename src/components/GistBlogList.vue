@@ -1,4 +1,8 @@
 <template>
+<v-container
+  fluid
+  grid-list-lg
+>
   <v-layout row wrap>
     <v-progress-linear
       :indeterminate="true"
@@ -17,10 +21,10 @@
         height="200px"
         >
         </v-card-media>
-        <v-card-text
-          v-if="gistList.length < 1"
-        >
-          Looks like {{ githubUser.name }} doesn't have any Gists...
+        <v-card-text>
+          <p>
+            {{ githubUser.bio }}
+          </p>
         </v-card-text>
         <v-card-actions>
         </v-card-actions>
@@ -54,10 +58,21 @@
             </v-card-text>
           </v-card>
         </v-flex>
+        <v-flex>
+          <v-card>
+
+          <v-card-text
+            v-if="gistList.length < 1"
+          >
+            Looks like {{ githubUser.name }} doesn't have any Gists...
+          </v-card-text>
+          </v-card>
+        </v-flex>
       </v-layout>
     </v-flex>
 
   </v-layout>
+  </v-container>
 </template>
 
 <script>

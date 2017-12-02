@@ -1,7 +1,11 @@
 <template>
   <v-app light>
-    <v-toolbar app>
-      <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon> -->
+    <v-toolbar app fixed>
+      <v-toolbar-side-icon
+        @click.stop="drawer = !drawer"
+        class="hidden-md-and-up"
+      >
+      </v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-btn
         v-for="(item, index) in navItems"
@@ -9,6 +13,7 @@
         flat
         :to="item.url"
         exact
+        class="hidden-sm-and-down"
       >
         <v-icon>
           {{ item.icon }}
@@ -26,16 +31,16 @@
         <v-icon>search</v-icon>
       </v-btn>
     </v-toolbar>
-    <v-content>
-      <v-container fluid grid-list-lg>
-          <span v-if="error">
-            <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
-          </span>
+    <main>
+      <span v-if="error">
+        <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+      </span>
+      <v-content>
         <v-slide-y-transition mode="out-in">
           <router-view></router-view>
         </v-slide-y-transition>
-      </v-container>
-    </v-content>
+      </v-content>
+    </main>
     <v-footer :fixed="fixed" app>
       <span>&copy; 2017</span>
     </v-footer>
@@ -50,7 +55,8 @@ export default {
   data () {
     return {
       searchBar: false,
-      fixed: false,
+      drawer: false,
+      fixed: true,
       title: 'Glogger',
       githubUserToGet: ''
     }

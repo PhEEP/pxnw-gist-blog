@@ -1,16 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import firebase from 'firebase'
+import moment from 'moment'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    githubUser: {
-      login: 'marcammann',
-      avatar_url: 'https://avatars0.githubusercontent.com/u/49620',
-      name: 'Marc Ammann'
-    },
+    githubUser: {},
     gists: [],
     gist: null,
     loading: false,
@@ -66,11 +64,16 @@ export const store = new Vuex.Store({
     setGithubUser ({ commit }, payload) {
       commit('clearError')
       commit('setLoading', true)
-      console.log(payload, 'githubuserpayload')
       axios
                 .get(`https://api.github.com/users/${payload}`)
                 .then(response => {
-                  console.log(response)
+                  firebase
+                        .database()
+                        .ref('users/' + userId)
+                        .set({
+                          ...response.data,
+                          created_at: moment()
+                        })
                   commit('setGithubUser', response.data)
                 })
                 .catch(error => {
@@ -85,18 +88,18 @@ export const store = new Vuex.Store({
                 .get(`https://api.github.com/gists/${payload}`)
                 .then(response => {
                   commit('setGist', response.data)
+                  commit('setLoading', false)
                 })
                 .catch(error => {
                   commit('setError', error)
                   commit('setLoading', false)
                 })
     },
-    getGistContent ({ commit, state }) {
-      commit('setLoading', true)
-      commit('clearError')
-      axios.get(state.gist.fields.content)
-    },
     clearError ({ commit }) {
+      commit('clearError')
+    },
+    getRecentUsers ({ commit }) {
+      commit('setLoading', true)
       commit('clearError')
     }
   },

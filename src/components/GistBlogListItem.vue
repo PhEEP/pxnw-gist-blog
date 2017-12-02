@@ -1,13 +1,17 @@
 <template>
   <v-layout row wrap>
     <v-flex>
-      <v-card>
+      <v-card v-if="gistContent">
         <v-card-title>
-          {{ gistContent.description || 'No Description'}}
+          Description: {{ gistContent.description || 'No Description'}}
         </v-card-title>
-        <v-card-text>
+        <v-card-text
+          v-for="(contentItem, index) in gistContent.files"
+          :key="index"
+        >
+          <h5>{{index}}</h5>
           <pre
-            v-text="gistContent.files.content.content"
+            v-text="contentItem.content"
           >
           </pre>
         </v-card-text>
