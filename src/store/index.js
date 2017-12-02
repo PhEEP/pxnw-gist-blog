@@ -13,7 +13,8 @@ export const store = new Vuex.Store({
     gist: null,
     loading: false,
     error: null,
-    searching: false
+    searching: false,
+    recentUsers: {}
   },
   mutations: {
     setGithubUser (state, payload) {
@@ -38,6 +39,9 @@ export const store = new Vuex.Store({
     setGist (state, payload) {
       console.log(payload, 'gist setting')
       state.gist = payload
+    },
+    setRecentUsers (state, payload) {
+      state.recentUsers = payload
     }
   },
   actions: {
@@ -69,10 +73,10 @@ export const store = new Vuex.Store({
                 .then(response => {
                   firebase
                         .database()
-                        .ref('users/' + userId)
+                        .ref('users/' + payload)
                         .set({
                           ...response.data,
-                          created_at: moment()
+                          created_at: moment().format()
                         })
                   commit('setGithubUser', response.data)
                 })
@@ -101,6 +105,13 @@ export const store = new Vuex.Store({
     getRecentUsers ({ commit }) {
       commit('setLoading', true)
       commit('clearError')
+      firebase
+                .database()
+                .ref('users')
+                .on('value', snapshot => {
+                  console.log(snapshot.val())
+                  commit('setRecentUsers', snapshot.val())
+                })
     }
   },
   getters: {
@@ -121,6 +132,9 @@ export const store = new Vuex.Store({
     },
     gist (state) {
       return state.gist
+    },
+    recentUsers (state) {
+      return state.recentUsers
     }
   }
 })

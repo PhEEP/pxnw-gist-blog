@@ -1,11 +1,9 @@
 <template>
   <v-container grid-list-lg>
-    <v-layout
-      row
-      wrap
-    >
+    <h2>Recent searches</h2>
+    <v-layout>
       <v-flex
-        v-for="(user, index) in users"
+        v-for="(user, index) in recentUsers"
         :key="index"
         xs12
         sm6
@@ -19,23 +17,15 @@
           >
           </v-card-media>
           <v-card-title>
-            {{ user.name }}
+            {{ user.name || user.login }}
           </v-card-title>
           <v-card-actions>
             <v-btn
               @click="goToUser(user.login)"
+              color="primary"
             >See Glog</v-btn>
           </v-card-actions>
         </v-card>
-      </v-flex>
-    </v-layout>
-    <h2>Recent searches</h2>
-    <v-layout>
-      <v-flex
-        v-for="(user, index) in recentSearches"
-        :key="index"
-      >
-        {{ user.name }}
       </v-flex>
     </v-layout>
   </v-container>
@@ -44,32 +34,6 @@
 <script>
 export default {
   name: 'HelloWorld',
-  data () {
-    return {
-      users: [
-        {
-          login: 'marcammann',
-          avatar_url: 'https://avatars0.githubusercontent.com/u/49620',
-          name: 'Marc Ammann'
-        },
-        {
-          login: 'PhEEP',
-          avatar_url: 'https://avatars2.githubusercontent.com/u/9273255',
-          name: 'Philippe Moore'
-        },
-        {
-          login: 'getify',
-          avatar_url: 'https://avatars1.githubusercontent.com/u/150330',
-          name: 'Kyle Simpson'
-        },
-        {
-          login: 'zassmin',
-          avatar_url: 'https://avatars2.githubusercontent.com/u/1654151',
-          name: 'zassmin'
-        }
-      ]
-    }
-  },
   methods: {
     goToUser (user) {
       this.$store.dispatch('setGithubUser', user)
@@ -81,8 +45,8 @@ export default {
     this.$store.dispatch('getRecentUsers')
   },
   computed: {
-    recentSearches () {
-      return this.$store.getters.recentSearches
+    recentUsers () {
+      return this.$store.getters.recentUsers
     }
   }
 }

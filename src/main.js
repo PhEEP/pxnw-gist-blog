@@ -8,6 +8,8 @@ import 'vuetify/dist/vuetify.css'
 import App from './App'
 import router from './router'
 import { store } from './store'
+import { config } from './helpers/firebaseConfig'
+import firebase from 'firebase'
 
 import AppAlert from './components/shared/AppAlert.vue'
 
@@ -24,6 +26,7 @@ Vue.use(Vuetify, {
 })
 Vue.component('app-alert', AppAlert)
 Vue.config.productionTip = false
+firebase.initializeApp(config)
 
 /* eslint-disable no-new */
 new Vue({

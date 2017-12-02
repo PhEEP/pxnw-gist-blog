@@ -29,7 +29,6 @@ export default {
       ev.preventDefault()
       this.$store.dispatch('setGithubUser', this.githubUserToGet)
       this.$store.dispatch('getGists', this.githubUserToGet)
-      this.$store.dispatch('addUserToRecent', this.githubUserToGet)
       this.$router.replace('/user/' + this.githubUserToGet)
       this.githubUserToGet = ''
     }

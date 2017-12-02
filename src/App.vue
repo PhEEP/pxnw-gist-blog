@@ -31,16 +31,14 @@
         <v-icon>search</v-icon>
       </v-btn>
     </v-toolbar>
-    <main>
+      <v-content>
       <span v-if="error">
         <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
       </span>
-      <v-content>
         <v-slide-y-transition mode="out-in">
           <router-view></router-view>
         </v-slide-y-transition>
       </v-content>
-    </main>
     <v-footer :fixed="fixed" app>
       <span>&copy; 2017</span>
     </v-footer>
