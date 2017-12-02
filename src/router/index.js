@@ -14,13 +14,13 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: '/user/:userId',
+      path: '/gister/:userId',
       name: 'GistBlogList',
       component: GistBlogList,
       props: { default: true }
     },
     {
-      path: '/user/:user/gist/:gistId',
+      path: '/gister/:user/gist/:gistId',
       name: 'GistBlogListItem',
       components: { default: GistBlogListItem },
       props: { default: true }

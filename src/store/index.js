@@ -18,7 +18,6 @@ export const store = new Vuex.Store({
   },
   mutations: {
     setGithubUser (state, payload) {
-      console.log(payload, 'set github user payload')
       state.githubUser = { ...payload }
     },
     setLoading (state, payload) {
@@ -37,7 +36,6 @@ export const store = new Vuex.Store({
       state.searching = !state.searching
     },
     setGist (state, payload) {
-      console.log(payload, 'gist setting')
       state.gist = payload
     },
     setRecentUsers (state, payload) {
@@ -48,18 +46,15 @@ export const store = new Vuex.Store({
     getGists ({ commit }, payload) {
       commit('setLoading', true)
       commit('clearError')
-      console.log(payload)
       axios
                 .get(`https://api.github.com/users/${payload}/gists`)
                 .then(response => {
                   commit('setGists', response.data)
                   commit('setLoading', false)
-                  console.log(response)
                 })
                 .catch(error => {
                   commit('setError', error)
                   commit('setLoading', false)
-                  console.log(error)
                 })
     },
     toggleSearch ({ commit }) {
@@ -109,8 +104,12 @@ export const store = new Vuex.Store({
                 .database()
                 .ref('users')
                 .on('value', snapshot => {
-                  console.log(snapshot.val())
+                  commit('setLoading', false)
                   commit('setRecentUsers', snapshot.val())
+                })
+                .catch(error => {
+                  commit('setError', error)
+                  commit('setLoading', false)
                 })
     }
   },

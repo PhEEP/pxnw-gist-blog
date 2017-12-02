@@ -38,7 +38,7 @@ export default {
     goToUser (user) {
       this.$store.dispatch('setGithubUser', user)
       this.$store.dispatch('getGists', user)
-      this.$router.replace('/user/' + user)
+      this.$router.replace('/gister/' + user)
     }
   },
   mounted () {

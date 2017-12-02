@@ -44,7 +44,7 @@
           lg2
         >
           <v-card
-            :to="'/user/' + githubUser.login + '/gist/' + gist.id"
+            :to="'/gister/' + githubUser.login + '/gist/' + gist.id"
           >
             <v-card-title>
               <h4>
@@ -82,6 +82,8 @@ export default {
     return {}
   },
   mounted () {
+    this.$store.dispatch('setGithubUser', githubUser.login)
+    this.$store.dispatch('getGists', githubUser.login)
   },
   methods: {
     dateFormat (date) {

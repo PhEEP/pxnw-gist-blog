@@ -103,9 +103,9 @@ export default {
           url: '/'
         },
         {
-          name: 'User',
+          name: 'Gister',
           icon: 'face',
-          url: '/user/' + this.githubUser.login
+          url: '/gister/' + this.githubUser.login
         }
       ]
     },
