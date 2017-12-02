@@ -14,7 +14,7 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: '/user/:user',
+      path: '/user/:userId',
       name: 'GistBlogList',
       component: GistBlogList,
       props: { default: true }

@@ -19,7 +19,8 @@ export const store = new Vuex.Store({
   },
   mutations: {
     setGithubUser (state, payload) {
-      state.user = payload
+      console.log(payload, 'set github user payload')
+      state.githubUser = { ...payload }
     },
     setLoading (state, payload) {
       state.loading = payload
@@ -63,10 +64,19 @@ export const store = new Vuex.Store({
       commit('toggleSearch')
     },
     setGithubUser ({ commit }, payload) {
-      axios.get(`https://api.github.com/users/${payload}`).then(response => {
-        console.log(response)
-        commit('setGithubUser', response.data)
-      })
+      commit('clearError')
+      commit('setLoading', true)
+      console.log(payload, 'githubuserpayload')
+      axios
+                .get(`https://api.github.com/users/${payload}`)
+                .then(response => {
+                  console.log(response)
+                  commit('setGithubUser', response.data)
+                })
+                .catch(error => {
+                  commit('setError', error)
+                  commit('setLoading', false)
+                })
     },
     setGist ({ commit }, payload) {
       commit('setLoading', true)

@@ -69,7 +69,6 @@ export default {
     return {}
   },
   mounted () {
-    this.$store.dispatch('getGists', this.githubUser.login)
   },
   methods: {
     dateFormat (date) {

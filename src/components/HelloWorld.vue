@@ -11,6 +11,7 @@
       <v-card>
         <v-card-media
           :src="user.avatar_url"
+          height="200px"
         >
         </v-card-media>
         <v-card-title>
@@ -18,7 +19,7 @@
         </v-card-title>
         <v-card-actions>
           <v-btn
-            :to="'/user/' + user.login"
+            @click="goToUser(user.login)"
           >See Glog</v-btn>
         </v-card-actions>
       </v-card>
@@ -39,10 +40,17 @@ export default {
         },
         {
           login: 'PhEEP',
-          avatar_url: '',
+          avatar_url: 'https://avatars2.githubusercontent.com/u/9273255',
           name: 'Philippe Moore'
         }
       ]
+    }
+  },
+  methods: {
+    goToUser (user) {
+      this.$store.dispatch('setGithubUser', user)
+      this.$store.dispatch('getGists', user)
+      this.$router.replace('/user/' + user)
     }
   }
 }
