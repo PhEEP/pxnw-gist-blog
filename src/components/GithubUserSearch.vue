@@ -5,7 +5,7 @@
     <v-text-field
       v-show="searching"
       v-model="githubUserToGet"
-      label="Github username"
+      placeholder="Github username"
     >
     </v-text-field>
   </v-form>

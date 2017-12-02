@@ -1,5 +1,25 @@
 <template>
   <v-app light>
+    <v-navigation-drawer
+      temporary
+      v-model="drawer"
+      light
+      absolute
+    >
+      <v-list>
+        <v-list-tile
+          v-for="item in navItems"
+          :key="item.name"
+          exact
+          :to="item.url"
+        >
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>{{ item.name }}</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
     <v-toolbar app fixed>
       <v-toolbar-side-icon
         @click.stop="drawer = !drawer"
