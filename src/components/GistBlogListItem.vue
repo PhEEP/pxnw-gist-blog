@@ -1,6 +1,5 @@
 <template>
   <v-layout row wrap>
-
     <v-flex>
       <v-card>
         <v-card-title>
@@ -34,6 +33,7 @@ export default {
     }
   },
   created () {
+    console.log('created list item with gist id ' + this.gistId)
     this.$store.dispatch('setGist', this.gistId)
   }
 }

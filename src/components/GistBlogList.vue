@@ -42,8 +42,7 @@
           lg2
         >
           <v-card
-            :to="'/gist/' + gist.id"
-            replace
+            :to="'/user/' + githubUser.login + '/gist/' + gist.id"
           >
             <v-card-title>
               <h4>
@@ -63,6 +62,7 @@
 
 <script>
 import moment from 'moment'
+
 export default {
   name: 'GistBlogList',
   data () {

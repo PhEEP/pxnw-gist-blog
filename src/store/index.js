@@ -81,6 +81,11 @@ export const store = new Vuex.Store({
                   commit('setLoading', false)
                 })
     },
+    getGistContent ({ commit, state }) {
+      commit('setLoading', true)
+      commit('clearError')
+      axios.get(state.gist.fields.content)
+    },
     clearError ({ commit }) {
       commit('clearError')
     }

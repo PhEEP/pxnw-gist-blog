@@ -17,15 +17,13 @@ export default new Router({
       path: '/user/:user',
       name: 'GistBlogList',
       component: GistBlogList,
-      props: { default: true },
-      children: [
-        {
-          path: '/gist/:gistId',
-          name: 'GistBlogListItem',
-          components: { default: GistBlogListItem },
-          props: { default: true }
-        }
-      ]
+      props: { default: true }
+    },
+    {
+      path: '/user/:user/gist/:gistId',
+      name: 'GistBlogListItem',
+      components: { default: GistBlogListItem },
+      props: { default: true }
     }
   ],
   mode: 'history'
