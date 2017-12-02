@@ -8,6 +8,11 @@
       <h1>{{ githubUser }}</h1>
     </v-flex>
     <v-flex
+      v-if="gistList.length < 1"
+    >
+      Looks like {{ githubUser }} doesn't have any Gists...
+    </v-flex>
+    <v-flex
       v-for="(gist, index) in gistList"
       :key="index"
       xs6
