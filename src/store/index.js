@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import firebase from 'firebase'
 import moment from 'moment'
+import _ from 'lodash'
 
 Vue.use(Vuex)
 
@@ -68,7 +69,7 @@ export const store = new Vuex.Store({
                 .then(response => {
                   firebase
                         .database()
-                        .ref('users/' + payload)
+                        .ref('users/' + _.toLower(payload))
                         .set({
                           ...response.data,
                           created_at: moment().format()
