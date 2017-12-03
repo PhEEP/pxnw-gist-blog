@@ -64,22 +64,24 @@ export const store = new Vuex.Store({
     setGithubUser ({ commit }, payload) {
       commit('clearError')
       commit('setLoading', true)
-      axios
-                .get(`https://api.github.com/users/${payload}`)
-                .then(response => {
-                  firebase
-                        .database()
-                        .ref('users/' + _.toLower(payload))
-                        .set({
-                          ...response.data,
-                          created_at: moment().format()
-                        })
-                  commit('setGithubUser', response.data)
-                })
-                .catch(error => {
-                  commit('setError', error)
-                  commit('setLoading', false)
-                })
+      if (typeof payload === 'string') {
+        axios
+                    .get(`https://api.github.com/users/${payload}`)
+                    .then(response => {
+                      firebase
+                            .database()
+                            .ref('users/' + _.toLower(payload))
+                            .set({
+                              ...response.data,
+                              created_at: moment().format()
+                            })
+                      commit('setGithubUser', response.data)
+                    })
+                    .catch(error => {
+                      commit('setError', error)
+                      commit('setLoading', false)
+                    })
+      }
     },
     setGist ({ commit }, payload) {
       commit('setLoading', true)

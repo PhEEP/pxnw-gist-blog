@@ -1,12 +1,15 @@
 <template>
   <v-container grid-list-lg>
     <h2>Recent searches</h2>
-    <v-layout>
+    <v-layout
+      row
+      wrap
+    >
       <v-flex
         v-for="(user, index) in recentUsers"
         :key="index"
-        xs12
-        sm6
+        xs6
+        sm4
         md3
         lg2
       >

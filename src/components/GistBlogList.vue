@@ -3,11 +3,14 @@
   fluid
   grid-list-lg
 >
-  <v-layout row wrap>
     <v-progress-linear
       :indeterminate="true"
       v-if="loading"
     ></v-progress-linear>
+  <v-layout
+    row
+    wrap
+  >
     <v-flex xs12>
       <h1>{{ githubUser.name || githubUser.login }}</h1>
     </v-flex>
