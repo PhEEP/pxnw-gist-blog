@@ -4,6 +4,8 @@
 
 ## Build Setup
 
+Uses the [Vuecli with Vuetify and Webpack](https://github.com/vuetifyjs/webpack-advanced)
+
 ``` bash
 # install dependencies
 npm install
@@ -60,8 +62,23 @@ only show certain Gists as blog posts, formatted Markdown as HTML etc.
 ## Questions
 
 * What do you think you would do different if you had 2 weeks to complete this assignment and no requirement to use Github. What would your backend solution look like?
+  * Testing
+  * User authentication
+  * User accounts to manage saved blogs
+  * Robust representation of github profiles
+  * Pagination of blog posts, next/prev posts, featured gists, etc.
+  * gist format influencing frontend display (markdown/html/json/php, etc.) syntax highlighting
+  * Linking of Github profile with option to pull in Gists as well as your own blog posts.
+  * I would probably keep the Firebase backend, it's flexible and scalable
+  * It would be awesome to have searchable gists by language/problem/tag, etc.
+  * Could turn into more of a social problem-solving site/network, more curated than StackOverflow or geared towards education/learning
 * How and where do you feel like this application should be deployed to?
+  * It's already deployed to Firebase hosting, which I think is a good solution.
 * Are you happy with your own solutions? If yes, what parts do you think are really well done, if not, what would you want to change?
+  * I'm pretty happy with how this turned out. The fundamentals are sound with a solid state management system via Vuex and some reusable components which are fairly easy to understand
+  * The site is (mostly) responsive and can be saved as an app on your smartphone screen
+  * It could use more documentation and testing
+    * I focused on my strengths. I don't have a ton of experience in making tests so I didn't want to take up a bunch of time with them here. I realize their value to a project and acknowledge my lack of experience with them.
 
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
